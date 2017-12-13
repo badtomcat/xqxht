@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>模板管理</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="css/frame.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<!-- 头部 begin -->
+<div class="headers">
+	<div class="headers_title" style="width:35%"><span class="tips">模板列表</span></div>
+	<div class="header_center">
+		<button onclick="parent.show_dialog('m/template/template.php?op=makedir', 600, 400)" class="buttonb" title="创建一个新的模板目录">创建目录</button>&nbsp;
+		<button onclick="update_template(); return false;" class="buttonb" title="从网站空间更新模板信息">更新模板</button>&nbsp;
+		<button onclick="if (confirm('您确定要备份当前站点的模板吗？')) parent.show_dialog('m/template/template.php?op=backup', 600, 600); return false;" class="buttonb" title="将模板备份到后台">备份模板</button>&nbsp;
+		<button onclick="parent.show_dialog('m/template/template.php?op=restore', 600, 600); return false;" class="buttonb" title="将后台备份的模板恢复到网站">恢复模板</button>&nbsp;
+	</div>
+	<div class="headers_oprate"><input type="button" value="刷新" onclick="self.location.reload();return false;" class="button" title="刷新本页面"></div>
+</div>
+<!-- 头部 end -->
+
+<div class="space"></div>
+
+<!-- 数据列表 begin -->
+<form name="mainform">
+<table width="100%" align="center" class="list">
+<tr><td class="head" align="center" width="4%">选</td><td class="head" align="left" width="">名称</td><td class="head" align="left" width="">所在位置</td><td class="head" align="center" width="120">操作</td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left"><b>默认</b></td><td class="item" align="left">/template/1/</td><td class="item" align="center"><a href="?op=edit&dir=%2Ftemplate%2F1%2F" onclick="high_light(this); parent.show_dialog(this.href); return false;">添加模板</a> <font color=silver>|</font> <a href="?op=delete&dir=%2Ftemplate%2F1%2F" onclick="return confirm_dir()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left">&nbsp;&nbsp;&nbsp;&nbsp;index.html</td><td class="item" align="left">/template/1/index.html</td><td class="item" align="center"><a href="?op=edit&file=%2Ftemplate%2F1%2Findex.html" onclick="high_light(this); parent.show_dialog(this.href); return false;">编辑</a> <font color=silver>|</font> <a href="?op=delete&file=%2Ftemplate%2F1%2Findex.html" onclick="return confirm_file()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left">&nbsp;&nbsp;&nbsp;&nbsp;page.html</td><td class="item" align="left">/template/1/page.html</td><td class="item" align="center"><a href="?op=edit&file=%2Ftemplate%2F1%2Fpage.html" onclick="high_light(this); parent.show_dialog(this.href); return false;">编辑</a> <font color=silver>|</font> <a href="?op=delete&file=%2Ftemplate%2F1%2Fpage.html" onclick="return confirm_file()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left">&nbsp;&nbsp;&nbsp;&nbsp;list.html</td><td class="item" align="left">/template/1/list.html</td><td class="item" align="center"><a href="?op=edit&file=%2Ftemplate%2F1%2Flist.html" onclick="high_light(this); parent.show_dialog(this.href); return false;">编辑</a> <font color=silver>|</font> <a href="?op=delete&file=%2Ftemplate%2F1%2Flist.html" onclick="return confirm_file()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left">&nbsp;&nbsp;&nbsp;&nbsp;class.html</td><td class="item" align="left">/template/1/class.html</td><td class="item" align="center"><a href="?op=edit&file=%2Ftemplate%2F1%2Fclass.html" onclick="high_light(this); parent.show_dialog(this.href); return false;">编辑</a> <font color=silver>|</font> <a href="?op=delete&file=%2Ftemplate%2F1%2Fclass.html" onclick="return confirm_file()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left"><b>about</b></td><td class="item" align="left">/template/about/</td><td class="item" align="center"><a href="?op=edit&dir=%2Ftemplate%2Fabout%2F" onclick="high_light(this); parent.show_dialog(this.href); return false;">添加模板</a> <font color=silver>|</font> <a href="?op=delete&dir=%2Ftemplate%2Fabout%2F" onclick="return confirm_dir()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left">&nbsp;&nbsp;&nbsp;&nbsp;list.html</td><td class="item" align="left">/template/about/list.html</td><td class="item" align="center"><a href="?op=edit&file=%2Ftemplate%2Fabout%2Flist.html" onclick="high_light(this); parent.show_dialog(this.href); return false;">编辑</a> <font color=silver>|</font> <a href="?op=delete&file=%2Ftemplate%2Fabout%2Flist.html" onclick="return confirm_file()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left"><b>子模板</b></td><td class="item" align="left">/template/block/</td><td class="item" align="center"><a href="?op=edit&dir=%2Ftemplate%2Fblock%2F" onclick="high_light(this); parent.show_dialog(this.href); return false;">添加模板</a> <font color=silver>|</font> <a href="?op=delete&dir=%2Ftemplate%2Fblock%2F" onclick="return confirm_dir()">删除</a> </td></tr>
+<tr id="#" onmouseover="mi(this)" onmouseout="mo(this)"><td class="item" align="center"><input name="delcheck" type="checkbox" value="" onclick="set_item_color(this)"></td><td class="item" align="left">&nbsp;&nbsp;&nbsp;&nbsp;footer.html</td><td class="item" align="left">/template/block/footer.html</td><td class="item" align="center"><a href="?op=edit&file=%2Ftemplate%2Fblock%2Ffooter.html" onclick="high_light(this); parent.show_dialog(this.href); return false;">编辑</a> <font color=silver>|</font> <a href="?op=delete&file=%2Ftemplate%2Fblock%2Ffooter.html" onclick="return confirm_file()">删除</a> </td></tr></table>
+</form>
+<!-- 数据列表 end -->
+
+<div class="space"></div>
+
+<!-- 分页链接 begin -->
+<div class="footer_op">
+	<div class="footer_op_left"><button onclick="select_all()" class="button">全选</button>&nbsp;<button onclick="unselect()" class="button">反选</button></div>
+	<div class="footer_op_right"><style>.pagelink{font-size:12px;background-color:#F6F6F6; border:1px solid gray}.pagelink_button{font-size:12px; background:#F3F3F3; padding:2px 0px 0px 0px; height:20px; border:1px solid gray; cursor:pointer}</style><div style='float:left; border:1px solid #FFDECE; background:#FFFAF7; height:18px; line-height:20px; font-size:12px; padding:0px 3px; overflow:hidden; '>第<font color=red><b>1</b></font>/<font color=blue><b>1</b></font>页&nbsp;每页<font color='green'><b>25</b></font>条&nbsp;共<font color='green'><b>9</b></font>条</div>&nbsp;&nbsp;<button onclick="location='?&page=0'" disabled='true' class='button'>上页</button>&nbsp;<button onclick="location='?&page=2'" disabled='true' class='button'>下页</button>&nbsp;<select name='plcombo' onchange="location='?&page='+this.value;" class='pagelink'><option value='1' selected>1 *</select></div>
+</div>
+<!-- 分页链接 end -->
+
+<div class="space"></div>
+
+<script type="text/javascript">
+function copyit(txt) {
+	if (window.clipboardData) {
+		window.clipboardData.clearData();
+		window.clipboardData.setData("Text", txt);
+		return true;
+	} else if (window.netscape) {
+		try {
+			netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+		} catch (e) {
+			alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将'signed.applets.codebase_principal_support'设置为'true'");
+		}
+		var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+		if (!clip) return false;
+		var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+		if (!trans) return false;
+		trans.addDataFlavor('text/unicode');
+		var str = new Object();
+		var len = new Object();
+		var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+		var copytext = txt;
+		str.data = copytext;
+		trans.setTransferData("text/unicode",str,copytext.length*2);
+		var clipid = Components.interfaces.nsIClipboard;
+		if (!clip) return false;
+		clip.setData(trans,null,clipid.kGlobalClipboard);
+		return true;
+	}
+	return false;
+}
+</script>
+
+<!-- 用于提交模板信息的表单<POST> @ 2013-03-06 -->
+<form id="submit_template_form" method="POST" style="display:none;">
+	<input type="hidden" name="content" id="template_content" value="" />
+	<input type="hidden" name="op" value="update_template2" />
+	<input type="hidden" name="show_status" id="show_status" value="1" />
+</form>
+
+
+
+
+</body>
+</html>

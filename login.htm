@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>系统登录 5.0版</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<style type="text/css">
+body,table,div,span {font-size:12px}
+body {background:white; text-align:center; margin:6px}
+div {text-align:left; background:white;}
+a {color:#4C4C4C; text-decoration:underline;}
+a:hover {color:#E8E800}
+.input {font-family:"Verdana","Arial"; background:white; font-size:12px; border:1px solid #84A1BD;}
+.button {border:0px; width:80px; height:22px; padding:0px 0px 0px 0px; background:url("img/ht_button.gif"); font-size:12px;}
+*html .button {padding-top:2px;}
+.clear {clear:both; font-size:0; height:0;}
+#change_color {border:0px solid red; height:6px; text-align:right;}
+.color_div {border:1px solid #FFCBB3; width:16px; height:16px; font-size:0; float:right; margin-right:4px; cursor:pointer}
+#main_back {position:absolute; margin-top:-150px; margin-left:-380px; top:45%; left:50%; width:755px; height:300px; border:0px dotted silver;}
+#left_top_img {background-image:url("img/ht_top_img.png"); background-repeat:no-repeat; width:400px; height:42px;}
+#back_img {width:755px; height:155px; background-image:url("img/ht_back.jpg"); background-repeat:no-repeat;}
+#left_bottom_img {background-image:url("img/ht_bottom_img.gif"); background-repeat:no-repeat; width:400px; height:42px;}
+
+#login_box {position:absolute; margin-left:50px; margin-top:-152px; width:267px; top:45%; left:50%; }
+#box_top {background:url("img/ht_box_top.gif") no-repeat; width:267px; height:45px;}
+#login_area {background:url("img/ht_box_back.gif") repeat-Y; width:267px;}
+#box_bottom {background:url("img/ht_box_bottom.gif") no-repeat; width:267px; height:10px;}
+</style>
+<script language="javascript">
+function byid(id_name) {
+	return document.getElementById(id_name);
+}
+
+function check_data(f) {
+	if (f.username.value == "") {
+		alert("请输入您的用户名！"); f.username.focus(); return false;
+	}
+	if (f.password.value == "") {
+		alert("请输入您的登录密码！"); f.password.focus(); return false;
+	}
+	return true;
+}
+
+function set_name() {
+	byid("username").value = get_arg("username");
+	if (byid('username').value != '') {
+		byid('password').focus();
+	} else {
+		byid('username').focus();
+	}
+}
+
+function get_arg(var_name) {
+	var arg = location.href.split("?")[1];
+	if (arg) {
+		var args = arg.split("&");
+		for (var i in args) {
+			var w = args[i].split("=");
+			if (w[0] == var_name) {
+				return w[1];
+			}
+		}
+	}
+	return "";
+}
+</script>
+</head>
+
+<body onload="set_name()">
+<div id="main_back">
+	<div id="left_top_img"></div>
+	<div id="back_img"></div>
+	<div id="left_bottom_img"></div>
+</div>
+
+<form name="main" method="POST" onsubmit="return check_data(this)">
+<div id="login_box">
+	<div id="box_top"></div>
+	<div id="login_area">
+		<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>
+			<tr>
+				<td width="39%" height="30" align="right">用户姓名：</td>
+				<td width="61%"><input name="username" id="username" type="text" class="input" size="20" style="width:120px" value=""></td>
+			</tr>
+			<tr>
+				<td height="30" align="right">登录密码：</td>
+				<td><input name="password" id="password" type="password" class="input" size="20" style="width:120px"></td>
+			</tr>
+			<tr>
+				<td height="20" colspan="2"></td>
+			</tr>
+			<tr align="center">
+				<td align="right"></td>
+				<td align="left"><input type="submit" value="登录系统" class="button"></td>
+			</tr>
+			<tr>
+				<td colspan="2" height="40"></td>
+			</tr>
+			<tr>
+				<td colspan="2" height="38" align="center">&nbsp;&nbsp;<a href="javascript:void(0);" onclick="alert('如有遇到技术上的问题，请加QQ：531164479沟通和解决。');">[技术支持]</a></td>
+			</tr>
+		</table>
+	</div>
+	<div id="box_bottom"></div>
+</div>
+<input type="hidden" name="op" value="login" />
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>添加人员</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link href="css/frame.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+#power_detail_div {width:596px; margin-top:5px; border:2px solid #ffb38e; }
+</style>
+<script language="javascript">
+function show_pass() {
+	var pass = document.mainform.pass.value;
+	if (pass != "") {
+		alert("您输入的密码是： " + pass + "  ");
+	} else {
+		alert("您还没有输入密码！");
+	}
+}
+
+function check_data() {
+	oForm = document.mainform;
+	if (oForm.name.value == "") {
+		alert("请输入帐号名称！");
+		oForm.name.focus();
+		return false;
+	}
+	if (oForm.realname.value == "") {
+		alert("请输入真实姓名！");
+		oForm.realname.focus();
+		return false;
+	}
+	if (oForm.character_id.value == "") {
+		alert("请选择权限！");
+		oForm.character_id.focus();
+		return false;
+	}
+	if (oForm.character_id.value == "-1" && byid("power_detail").value == '') {
+		alert("您选择了“自定义”设置权限，请设置好自定义权限。");
+		oForm.character_id.focus();
+		return false;
+	}
+	return true;
+}
+
+function set_power_do(str) {
+	byid("power_detail").value = str;
+}
+
+function set_power(show_or_hide) {
+	if (show_or_hide == "show") {
+		byid("set_power_frame").src = 'admin.php?op=set_power&power='+byid("power_detail").value;
+		byid("power_detail_div").style.display = "block";
+	} else {
+		byid("set_power_frame").src = "about:blank";
+		byid("power_detail_div").style.display = "none";
+	}
+}
+
+function show_hide_detail(o) {
+	if (o.value == "-1") {
+		set_power("show");
+	} else {
+		set_power("hide");
+	}
+}
+</script>
+</head>
+
+<body>
+<form name="mainform" id="form_1" method="POST" onsubmit="return check_data()">
+<table width="100%" class="edit">
+	<tr>
+		<td colspan="2" class="head">基本数据</td>
+	</tr>
+	<tr>
+		<td class="left"><font color="red">登录名：</font></td>
+		<td class="right"><input name="name" value="" class="input" style="width:120px" > <span class="intro">创建后不能更改</span></td>
+	</tr>
+	<tr>
+		<td class="left"><font color="red">密码：</font></td>
+		<td class="right"><input name="pass" value="" class="input" style="width:120px"> <span class="intro">密码必须输入，且6位以上</span></td>
+	</tr>
+	<tr>
+		<td class="left"><font color='red'>真实姓名：</font></td>
+		<td class="right"><input name="realname" value="" class="input" style="width:120px"> <span class='intro'>真实姓名仅用于显示</span></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="head">授权</td>
+	</tr>
+
+	<tr>
+		<td class="left" id="power_detail_title" valign="top" style="padding-top:8px;">选择权限：</td>
+		<td class="right" id="power_detail_data">
+			<select name="character_id" onchange="show_hide_detail(this)" class="combo" style="width:126px">
+				<option value="" style="color:gray">--请选择--</option>
+				<option value="-1" style="color:red">--自定义--</option>
+				<option value="1" >管理员</option><option value="2" >站长</option><option value="3" >编辑</option>			</select> &nbsp;
+			<span class="intro">必须设定权限</span>			<input type="hidden" name="power_detail" id="power_detail" value="">
+			<div id="power_detail_div" style="display:none;"><iframe id="set_power_frame" src="about:blank" frameborder="0" scrolling="auto" width="100%" height="500px" style="margin:0;padding:0; vertiacal-align:middle;"></iframe></div>
+			<input type="hidden" name="power_crc" value="">
+
+		</td>
+	</tr>
+
+
+	<tr>
+		<td class="left" valign="top" style="padding-top:8px;">管理站点：<br><font color="gray">(按网址排序)&nbsp;</font></td>
+		<td class="right">
+			<table width="600" class="list" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="head" width="8%" align="center">选</td>
+					<td class="head" width="40%" align="left">网址 URL</td>
+					<td class="head" align="left">网站名称</td>
+					<td class="head" width="20%" align="center">权限</td>
+				</tr>
+				<tr class="" onmouseover="mi(this)" onmouseout="mo(this)">
+					<td class="item" align="center"><input type="checkbox" onclick="set_item_color(this)" name="sites[]" value="2" ></td>
+					<td class="item" align="left">http://mip.baidu.com/</td>
+					<td class="item" align="left">mip.baidu.com</td>
+					<td class="item" align="center">
+						<select name="site_group[2]" class="combo">
+							<option value="0" style="color:gray">-不设置-</option>
+							<option value="1" >管理员</option><option value="2" >站长</option><option value="3" >编辑</option>						</select>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="head">个人资料</td>
+	</tr>
+	<tr>
+		<td class="left">笔名：</td>
+		<td class="right"><input name="penname" value="" class="input" size="20" style="width:200px">  用于发表文章</td>
+	</tr>
+	<tr>
+		<td class="left">手机：</td>
+		<td class="right"><input name="mobile" value="" class="input" size="20" style="width:200px"></td>
+	</tr>
+	<tr>
+		<td class="left">QQ：</td>
+		<td class="right"><input name="qq" value="" class="input" size="20" style="width:200px"></td>
+	</tr>
+</table>
+
+
+<div class="space"></div>
+
+<input type="hidden" name="id" value="">
+<input type="hidden" name="op" value="add">
+<div class="button_line"><input type="submit" class="submit" value="提交资料"></div>
+
+</form>
+
+<div class="space"></div>
+</body>
+</html>
