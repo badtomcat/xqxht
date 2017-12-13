@@ -11,7 +11,20 @@ function hideDialog()
 	$("#dl_box_div").hide();
 }
 
-
+function showAjaxLoading(msg,delay)
+{
+  delay = delay || 5;
+  $("#sys_msg_box_content").html(msg);
+  $("#sys_msg_box").show();
+  $('#sys_msg_box').css({ 
+    position:'absolute', 
+    left: ($(window).width() - $('#sys_msg_box').outerWidth())/2, 
+    top: ($(window).height() - $('#sys_msg_box').outerHeight())/2 + $(document).scrollTop() 
+  }); 
+  setTimeout(function(){
+    $("#sys_msg_box").hide();
+  },delay * 1000);
+}
 
 
 

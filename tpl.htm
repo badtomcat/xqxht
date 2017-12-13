@@ -1,8 +1,6 @@
 <html style="overflow: auto;">
     <head>
-        <title>
-            ddd
-        </title>
+        <title>ddd - dddddddddddddd</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link href="css/frame.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -64,7 +62,7 @@
                                             <nobr>(未选择站点) | 
                                             	<a href="javascript:void(0)" onclick="showDialog()" title="切换到其他网站">切换站点</a> | 
                                             	<!-- <a href="javascript:void(0)" title="反馈系统问题和改进意见">反馈</a> |  -->
-                                             <a href="http://ulan.npfuke.cn/?op=logout">退出</a>&nbsp;</nobr>
+                                             <a href="javascript:void(showAjaxLoading('测试fffffffffffffffffffffff显示LOADING测试fffffffffffffffffffffff显示LOADING测试fffffffffffffffffffffff显示LOADING测试fffffffffffffffffffffff显示LOADING测试fffffffffffffffffffffff显示LOADING',6))">退出</a>&nbsp;</nobr>
                                         </div>
                                     </td>
                                 </tr>
@@ -165,19 +163,6 @@
                 </tr>
             </tbody>
         </table> <div id="foot_bar" style="display:none;"></div>
-        <div id="sys_navi" style="display:none"></div>
-        <div id="sys_navi_margin" height="12" style="display:none"></div><!-- online message div -->
-        <div id="online_message" style="display:none; position:absolute;"></div><!-- loading status table -->
-        <table id="sys_loading" style="display: none; position: absolute; border: 1px solid rgb(0, 213, 213); background: none 0% 0% repeat scroll rgb(217, 255, 255); line-height: 120%; left: 1047px; top: 55px;">
-            <tbody>
-                <tr>
-                    <td style="padding:1px 0 0 6px">
-                        <img src="img/loading.gif" width="16" height="16" align="absmiddle">
-                    </td>
-                    <td id="sys_loading_tip" style="padding:2px 6px 0px 6px"></td>
-                </tr>
-            </tbody>
-        </table><!-- sys dialog box -->
         <div id="dl_layer_div"></div>
         <div id="dl_box_div" class="obox">
             <div id="dl_box_title_box">
@@ -192,7 +177,7 @@
             </div>
             <div id="dl_content" style="display:none;"></div>
         </div><!-- message box div -->
-        <div id="sys_msg_box" style="display:none; position:absolute;cursor:pointer;" title="点击关闭">
+        <div id="sys_msg_box" title="点击关闭">
             <table cellpadding="0">
                 <tbody>
                     <tr>
